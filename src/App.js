@@ -15,12 +15,19 @@ class App extends Component {
     };
   }
 
+  clearAll() {
+    this.setState({ todos: []});
+  }
+
   deleteToDo(index) {
-    console.log("delete button pressed");
+    const todos = this.state.todos;
+    todos.splice(index, 1)
+    this.setState({ todos: todos });
+    // I couldn't figure out how to do this with filter() but I think it would have saved me a couple of lines of code.  Could you please show me how?
   }  
 
   handleChange(e) {
-    this.setState({ newTodoDescription: e.target.value })
+    this.setState({ newTodoDescription: e.target.value });
   }
 
   handleSubmit(e) {
@@ -48,6 +55,8 @@ class App extends Component {
         <form onSubmit={ (e) => this.handleSubmit(e) }>
           <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) } />
           <input type="submit" />
+          <input type="button" value="Clear all" onClick= { () => this.clearAll()}/>
+          {/* because it seemed useful */}
          </form>       
       </div>
     );
